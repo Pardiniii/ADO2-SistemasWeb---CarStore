@@ -3,24 +3,16 @@ package br.com.carstore.controller;
 import br.com.carstore.model.Car;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+import java.util.Map;
+
+@Controller
+@RequestMapping("/api/carros")
 public class IndexController {
-
-    @GetMapping("/")
-    public String index(){
-        return "<h1>Hello world</h1>";
+    @PostMapping
+    public Map<String, String> criar (@RequestParam String nome,
+                                      @RequestParam String cor){
+        return Map.of("nome",nome,"cor",cor);
     }
-
-    @GetMapping("/car")
-    public ResponseEntity<Car> home() {
-        Car car = new Car();
-        car.setName("jetta");
-        car.setColor("preto");
-
-        return ResponseEntity.ok(car);
-    }
-
 }
